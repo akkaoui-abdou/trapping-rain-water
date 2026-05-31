@@ -175,3 +175,106 @@ Résultat :
   * **O(1)** en mémoire.
 
 Cette solution est la plus souvent attendue lors des entretiens techniques et sur LeetCode.
+
+
+
+## Exemple
+Pour :
+
+```python
+height = [0,1,0,2]
+```
+
+Calculons l'eau retenue à chaque position.
+
+## Étape 1 : Trouver les max à gauche et à droite
+
+| Index | Height | Max Gauche | Max Droite |
+| ----- | ------ | ---------- | ---------- |
+| 0     | 0      | 0          | 2          |
+| 1     | 1      | 1          | 2          |
+| 2     | 0      | 1          | 2          |
+| 3     | 2      | 2          | 2          |
+
+---
+
+## Étape 2 : Calculer l'eau retenue
+
+Formule :
+
+```python
+water[i] = min(max_left[i], max_right[i]) - height[i]
+```
+
+### Index 0
+
+```python
+min(0, 2) - 0 = 0
+```
+
+Eau = **0**
+
+### Index 1
+
+```python
+min(1, 2) - 1 = 0
+```
+
+Eau = **0**
+
+### Index 2
+
+```python
+min(1, 2) - 0 = 1
+```
+
+Eau = **1**
+
+### Index 3
+
+```python
+min(2, 2) - 2 = 0
+```
+
+Eau = **0**
+
+---
+
+## Résultat final
+
+| Index | Eau retenue |
+| ----- | ----------- |
+| 0     | 0           |
+| 1     | 0           |
+| 2     | 1           |
+| 3     | 0           |
+
+Total :
+
+```python
+0 + 0 + 1 + 0 = 1
+```
+
+✅ **Réponse :**
+
+```python
+height = [0,1,0,2]
+
+output = 1
+```
+
+### Visualisation
+
+```text
+Hauteurs :
+
+      █
+  █   █
+  █ ~ █
+__█_█_█__
+
+~ = eau
+```
+
+La case d'index `2` est coincée entre une barre de hauteur `1` à gauche et une barre de hauteur `2` à droite, elle peut donc retenir **1 unité d'eau**.
+
