@@ -278,3 +278,29 @@ __█_█_█__
 
 La case d'index `2` est coincée entre une barre de hauteur `1` à gauche et une barre de hauteur `2` à droite, elle peut donc retenir **1 unité d'eau**.
 
+
+```python
+height = [0, 1, 0, 2]
+n = len(height)
+
+max_left = [0] * n
+max_right = [0] * n
+
+max_left[0] = height[0]
+for i in range(1, n):
+    max_left[i] = max(max_left[i - 1], height[i])
+
+max_right[n - 1] = height[n - 1]
+for i in range(n - 2, -1, -1):
+    max_right[i] = max(max_right[i + 1], height[i])
+
+water = [0] * n
+for i in range(n):
+    water[i] = min(max_left[i], max_right[i]) - height[i]
+
+print(max_left)   # [0, 1, 1, 2]
+print(max_right)  # [2, 2, 2, 2]
+print(water)      # [0, 0, 1, 0]
+print(sum(water)) # 1
+
+```
